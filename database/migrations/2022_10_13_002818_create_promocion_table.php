@@ -13,16 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('negocio', function (Blueprint $table) {
-            $table->bigIncrements('id_Negocio');
-            $table->unsignedBigInteger('id_Usuario');
-            $table->string('nombre',16);
-            $table->string('descrip',100);
-            $table->string('ubicacion',50);
-            $table->unsignedBigInteger('telefono');
+        Schema::create('promocion', function (Blueprint $table) {
+            $table->id('id_Promocion');
+            $table->foreignId('id_Producto');
+            $table->double('descuento','15,2')->nullable();
+            $table->date('fechaIni')->nullable();
+            $table->date('fechaFin')->nullable();
             $table->boolean('activo');
+            //$table->string('imgURL',230); *******PENDIENTEE******
             //$table->timestamps(); 
-            $table->foreign('id_Usuario')->references('id_Usuario')->on('Usuario');
         });
     }
 
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('promocion');
     }
 };

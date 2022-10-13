@@ -13,18 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('Usuario', function (Blueprint $table) {
-            $table->bigIncrements('id_Usuario');
-            $table->string('nombre');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->bigInteger('telefono');
-            $table->rememberToken();
+        Schema::create('negocio', function (Blueprint $table) {
+            $table->id('id_Negocio');
+            $table->foreignId('id_Usuario');
+            $table->string('nombre',16);
+            $table->string('descripcion',100);
+            $table->string('ubicacion',50);
+            $table->string('telefono', 15);
+            $table->boolean('activo');
             //$table->timestamps();
         });
-        
-
     }
 
     /**
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('negocio');
     }
 };
