@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Usuario extends Model
 {
     use HasFactory;
-    protected $table = 'usuario';
+    protected $table = 'usuarios';
     protected $primarykey = 'id_Usuario';
-    protected $fillable = ['nombre','email','password','telefono','remember_token'];
+    protected $fillable = ['nombre','email','password','telefono'];
 
-    protected $hidden   = ['password','remember_token'];
+    //protected $hidden   = ['password','remember_token'];
+    //protected $casts = ['email_verified_at' => 'datetime',];
 
 }
