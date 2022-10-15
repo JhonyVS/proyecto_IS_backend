@@ -7,6 +7,8 @@ use App\Models\Producto;
 use App\Models\Promocion;
 use App\Models\Negocio;
 use App\Models\Usuario;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon; 
 
 class ProductoController extends Controller
 {
@@ -17,6 +19,20 @@ class ProductoController extends Controller
      */
     public function index()
     {
+      $hoy = Carbon::today();
+      $productos = DB::table('Producto')
+        ->join('Promocion', 'Promocion.id_Promocion', '=', 'Producto.id_Promocion')
+        ->where('fechaIni', '>', $hoy, true)
+        ->whereIn('fechaFin', '<', $hoy)
+        ->select(
+          'id_Producto',
+          'categoria',
+          'nombre',
+          'precio',
+          'fechaFin'
+        )
+        ->get();
+      return $productos;
         //
     }
 
@@ -39,12 +55,12 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
       $messages = [
-          'required' => 'El campo :attribute es obligatorio',
-          'unique' => 'El nombre :input ya fue tomado',
-          // 'equipos.*.preinscripcion_numero_de_deposito.unique' => 'El numero de transaccion :input ya uso en otro equipo',
-          // 'equipos.*.categoria.required' => 'Debe seleccionar una categoria',
-          // 'equipo_nacionalidad.required' => 'Debe seleccionar una nacionalidad'
-        ];
+        'required' => 'El campo :attribute es obligatorio',
+        'unique' => 'El nombre :input ya fue tomado',
+        // 'equipos.*.preinscripcion_numero_de_deposito.unique' => 'El numero de transaccion :input ya uso en otro equipo',
+        // 'equipos.*.categoria.required' => 'Debe seleccionar una categoria',
+        // 'equipo_nacionalidad.required' => 'Debe seleccionar una nacionalidad'
+      ];
     
       $request->validate([
         'producto_nombre' => 'required|min:3|max:50',
@@ -59,28 +75,28 @@ class ProductoController extends Controller
         //'promocion_hora_fin' => 'required'
       ], $messages);
 
-      //usuario estático
-      $pass = "mypass1234";
-      $usuario = Usuario::create([
-        'nombre' => "usuario de ejemplo 1",
-        'email' => "example@mail.com",
-        'password' => $pass,
-        // 'password' => bcrypt($pass),
-        'telefono' => 69435673
-      ]);
+      // //usuario estático
+      // $pass = "mypass1234";
+      // $usuario = Usuario::create([
+      //   'nombre' => "usuario de ejemplo 1",
+      //   'email' => "example@mail.com",
+      //   'password' => $pass,
+      //   // 'password' => bcrypt($pass),
+      //   'telefono' => 69435673
+      // ]);
 
-      //negocio estatico
+      // //negocio estatico
 
-      $negocio = Negocio::create([
-        'id_Usuario' => $usuario->id_Usuario,
-        'nombre' => "negocio de ejemplo",
-        'ubicacion' => "ubicacion de ejemplo",
-        'telefono' => 77665544,
-        'activo' => 1
-      ]);
+      // $negocio = Negocio::create([
+      //   'id_Usuario' => $usuario->id_Usuario,
+      //   'nombre' => "negocio de ejemplo",
+      //   'ubicacion' => "ubicacion de ejemplo",
+      //   'telefono' => 77665544,
+      //   'activo' => 1
+      // ]);
 
       $producto = Producto::create([
-        'id_Negocio' => $negocio->id_Negocio,
+        'id_Negocio' => 1,
         'categoria' => $request->producto_categoria,
         'nombre' => $request->producto_nombre,
         'descrip' => $request->producto_descripcion,
@@ -94,8 +110,7 @@ class ProductoController extends Controller
         'descuento' => $request->promocion_descuento,
         //'descuento_nombre' => $request->descuento_nombre,
         'fechaIni' => $request->promocion_fecha_inicio,
-        'fechaFin' => $request->promocion_fecha_fin,
-        'activo' => 1
+        'fechaFin' => $request->promocion_fecha_fin
         //'hora_inicio' => $request->descuento_hora_inicio,
         //'hora_fin' => $request->descuento_hora_fin
       ]);
