@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('negocio', function (Blueprint $table) {
             $table->bigIncrements('id_Negocio');
             $table->unsignedBigInteger('id_Usuario');
-            $table->string('nombre',16);
+            $table->string('nombre',30);
             $table->string('descrip',100);
             $table->string('ubicacion',50);
             $table->unsignedBigInteger('telefono')->nullable();
