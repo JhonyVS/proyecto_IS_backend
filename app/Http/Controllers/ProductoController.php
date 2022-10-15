@@ -70,9 +70,10 @@ class ProductoController extends Controller
         'producto_categoria' => 'required',
         'promocion_descuento' => 'required',
         'promocion_fecha_inicio' => 'required',
-        'promocion_fecha_fin' => 'required'
-        // 'promocion_hora_inicio' => 'required',
-        //'promocion_hora_fin' => 'required'
+        'promocion_fecha_fin' => 'required',
+        'promocion_hora_inicio' => 'required',
+        'promocion_hora_fin' => 'required',
+        'negocio_id' => 'required'
       ], $messages);
 
       // //usuario estático
@@ -96,23 +97,23 @@ class ProductoController extends Controller
       // ]);
 
       $producto = Producto::create([
-        'id_Negocio' => 1,
+        'id_Negocio' => $request->negocio_id,
         'categoria' => $request->producto_categoria,
         'nombre' => $request->producto_nombre,
         'descrip' => $request->producto_descripcion,
-        'precio' => $request->producto_precio,
-        'activo' => 1,
+        'precio' => $request->producto_precio
         //'url_imagen' => $request->producto_url_imagen
       ]);
 
       Promocion::create([
-        'id_Producto' => $producto->id_producto,
+        'id_Producto' => $producto->id_Producto,
         'descuento' => $request->promocion_descuento,
         //'descuento_nombre' => $request->descuento_nombre,
         'fechaIni' => $request->promocion_fecha_inicio,
-        'fechaFin' => $request->promocion_fecha_fin
-        //'hora_inicio' => $request->descuento_hora_inicio,
-        //'hora_fin' => $request->descuento_hora_fin
+        'fechaFin' => $request->promocion_fecha_fin,
+        'horaIni' => $request->promocion_hora_inicio,
+        'horaFin' => $request->promocion_hora_fin,
+        'ubicacion' => $request->promocion_ubicacion
       ]);
 
       

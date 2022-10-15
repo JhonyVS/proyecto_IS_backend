@@ -16,15 +16,16 @@ return new class extends Migration
         Schema::create('negocio', function (Blueprint $table) {
             $table->bigIncrements('id_Negocio');
             $table->unsignedBigInteger('id_Usuario');
-            $table->string('nombre',16);
+            $table->string('nombre',30);
             $table->string('descrip',100);
             $table->string('ubicacion',50);
             $table->unsignedBigInteger('telefono')->nullable();
             $table->time('horarioInicio')->default('00:00:00');
             $table->time('horarioCierre')->default('00:00:00');
 
-            $table->boolean('activo');
-            //$table->timestamps();
+            $table->boolean('activo')->default(1);//TRUE HASTA QUE LO DESACTIVE EL DUEÑO
+
+            $table->timestamps();
             $table->foreign('id_Usuario')->references('id_Usuario')->on('Usuario');
         });
     }

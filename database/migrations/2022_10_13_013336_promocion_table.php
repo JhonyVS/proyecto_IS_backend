@@ -19,13 +19,13 @@ return new class extends Migration
             $table->double('descuento','15,2')->nullable();
             $table->date('fechaIni')->nullable();
             $table->date('fechaFin')->nullable();
-            $table->time('horarioIni')->default('00:00:00')->nullable();
-            $table->time('horarioFin')->default('00:00:00')->nullable();
+            $table->time('horaIni')->default('00:00:00')->nullable();
+            $table->time('horaFin')->default('00:00:00')->nullable();
             $table->string('ubicacion',50)->nullable();
 
-            $table->boolean('activo');
+            $table->boolean('activo')->default(1);
             //$table->string('imgURL',230); *******PENDIENTEE******
-            //$table->timestamps(); 
+            $table->timestamps(); 
             $table->foreign('id_Producto')->references('id_Producto')->on('producto');
         });
     }

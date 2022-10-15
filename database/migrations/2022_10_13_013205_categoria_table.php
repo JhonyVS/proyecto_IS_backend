@@ -17,6 +17,7 @@ return new class extends Migration
             $table->bigIncrements('id_Categoria');
             $table->string('nombre',30);
             $table->string('descrip',100)->nullable();
+            $table->timestamps();
         });
     }
 

@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('nombre',30);
             $table->string('descrip',100)->nullable();
             $table->double('precio','15,2');// 15 # antes de la coma y 2 # despues de la coma
-            $table->boolean('activo');
+            $table->boolean('activo')->default(1);
             //$table->string('imgURL',230); *******PENDIENTEE******
-            //$table->timestamps(); 
+            $table->timestamps(); 
             $table->foreign('id_Negocio')->references('id_Negocio')->on('negocio');
             $table->foreign('categoria')->references('id_Categoria')->on('categoria');
         });
