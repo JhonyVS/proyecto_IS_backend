@@ -15,12 +15,15 @@ class UsuarioSeeder extends Seeder
      */
     public function run()
     {
-        $us = new Usuario();
-        $us->nombre ="Jhony";
-        $us->email ="miemail@correo.com";
-        $us->password="1234";
-        $us->telefono=78340215;
-        
-        $us->save();
+        /** 
+        *$us = new Usuario();
+        *$us->nombre ="Jhony";
+        *$us->email ="miemail@correo.com";
+        *$us->password="1234";
+        *$us->telefono=78340215;
+        *
+        *$us->save();
+        */
+        Usuario::factory(100)->create();
     }
 }
