@@ -11,5 +11,10 @@ class Promocion extends Model
     protected $table = 'promocion';
     protected $primarykey = 'id_Promocion';
     protected $fillable = ['id_Producto','descuento','fechaIni','fechaFin',
-                        'horaIni','horaFin'];
+                        'horaIni','horaFin', 'ubicacion'];
+
+    public function producto()
+    {
+        return $this->belongsTo(Producto::class, 'id_Producto', 'id_Producto');
+    }
 }
