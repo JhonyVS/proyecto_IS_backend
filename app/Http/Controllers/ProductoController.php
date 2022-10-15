@@ -20,12 +20,12 @@ class ProductoController extends Controller
     public function index()
     {
       $hoy = Carbon::today();
-      $productos = DB::table('Producto')
-        ->join('Promocion', 'Promocion.id_Promocion', '=', 'Producto.id_Promocion')
-        ->where('fechaIni', '>', $hoy, true)
-        ->whereIn('fechaFin', '<', $hoy)
+      $productos = DB::table('producto')
+        ->leftJoin('promocion', 'promocion.id_Producto', '=', 'producto.id_Producto')
+        // ->where('fechaFin', '>', $hoy)
+        // ->whereIn('fechaFin', '>', $hoy)
         ->select(
-          'id_Producto',
+          'producto.id_Producto',
           'categoria',
           'nombre',
           'precio',

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\NegocioController;
 use App\Http\Controllers\ProductoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,8 +23,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/categorias', [CategoriaController::class, 'index']);
 
-Route::get('descuentos', [DescuentoController::class, 'index']);
+Route::get('/descuentos', [DescuentoController::class, 'index']);
 
 Route::post('/registro/producto', [ProductoController::class, 'store']);
 
 Route::get('/destacados', [ProductoController::class, 'index']);
+
+Route::post('/registro/negocio', [NegocioController::class, 'store']);
