@@ -19,7 +19,10 @@ return new class extends Migration
             $table->string('nombre',16);
             $table->string('descrip',100);
             $table->string('ubicacion',50);
-            $table->unsignedBigInteger('telefono');
+            $table->unsignedBigInteger('telefono')->nullable();
+            $table->time('horarioInicio')->default('00:00:00');
+            $table->time('horarioCierre')->default('00:00:00');
+
             $table->boolean('activo');
             //$table->timestamps();
             $table->foreign('id_Usuario')->references('id_Usuario')->on('Usuario');
