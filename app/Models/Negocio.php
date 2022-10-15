@@ -13,4 +13,15 @@ class Negocio extends Model
     protected $fillable = ['id_Usuario','nombre','descrip','ubicacion',
                             'telefono','horarioInicio','horarioCierre'];
 
+
+
+    //relacion uno a muchos
+    public function productos(){
+        return $this->hasMany('App\Models\Producto');
+    }
+
+    // relacion muchos a uno
+    public function usuarios(){
+        return $this->belongsTo('App\Models\Usuario');
+    }
 }

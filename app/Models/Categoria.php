@@ -13,4 +13,8 @@ class Categoria extends Model
     
     protected $fillable = ['nombre','descrip'];
     
+    //relacion uno a muchos
+    public function productos(){
+        return $this->hasMany('App\Models\Producto');
+    }
 }

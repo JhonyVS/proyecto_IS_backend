@@ -14,4 +14,10 @@ class Usuario extends Model
     protected $hidden   = ['password','remember_token'];
     protected $casts = ['email_verified_at' => 'datetime'];
 
+
+    //relacion uno a muchos
+    public function negocios(){
+        return $this->hasMany('App\Models\Negocio');
+    }
+
 }
