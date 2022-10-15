@@ -10,5 +10,7 @@ class Categoria extends Model
     use HasFactory;
     protected $table = 'categoria';
     protected $primarykey = 'id_Categoria';
+    
     protected $fillable = ['nombre','descrip'];
+    
 }

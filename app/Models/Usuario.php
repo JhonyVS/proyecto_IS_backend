@@ -11,7 +11,6 @@ class Usuario extends Model
     protected $table = 'usuario';
     protected $primarykey = 'id_Usuario';
     protected $fillable = ['nombre','email','password','telefono'];
-
     protected $hidden   = ['password','remember_token'];
     protected $casts = ['email_verified_at' => 'datetime'];
 

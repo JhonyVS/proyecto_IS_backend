@@ -23,8 +23,9 @@ return new class extends Migration
             $table->time('horarioInicio')->default('00:00:00');
             $table->time('horarioCierre')->default('00:00:00');
 
-            $table->boolean('activo');
-            //$table->timestamps();
+            $table->boolean('activo')->default(1);//TRUE HASTA QUE LO DESACTIVE EL DUEÑO
+
+            $table->timestamps();
             $table->foreign('id_Usuario')->references('id_Usuario')->on('Usuario');
         });
     }
