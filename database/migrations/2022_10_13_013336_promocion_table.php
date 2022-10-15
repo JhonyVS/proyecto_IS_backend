@@ -19,8 +19,8 @@ return new class extends Migration
             $table->double('descuento','15,2')->nullable();
             $table->date('fechaIni')->nullable();
             $table->date('fechaFin')->nullable();
-            $table->time('horarioIni')->default('00:00:00')->nullable();
-            $table->time('horarioFin')->default('00:00:00')->nullable();
+            $table->time('horaIni')->default('00:00:00')->nullable();
+            $table->time('horaFin')->default('00:00:00')->nullable();
             $table->string('ubicacion',50)->nullable();
 
             $table->boolean('activo')->default(1);

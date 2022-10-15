@@ -12,4 +12,8 @@ class Categoria extends Model
     protected $primarykey = 'id_Categoria';
     protected $fillable = ['nombre','descrip'];
     
+    //relacion uno a muchos
+    public function productos(){
+        return $this->hasMany('App\Models\Producto');
+    }
 }
