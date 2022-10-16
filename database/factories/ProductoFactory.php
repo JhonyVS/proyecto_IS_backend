@@ -17,8 +17,8 @@ class ProductoFactory extends Factory
     public function definition()
     {
         return [
-            'id_negocio'    => $this->faker->numberBetween(1,100),
-            'id_categoria'     => $this->faker->numberBetween(1,7),
+            'negocio_id'    => $this->faker->numberBetween(1,100),
+            'categoria_id'     => $this->faker->numberBetween(1,7),
             'nombre'        => $this->faker->title(),
             'descrip'       => $this->faker->sentence(),
             'precio'        => $this->faker->randomFloat(2,1,20),

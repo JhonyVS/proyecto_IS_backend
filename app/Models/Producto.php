@@ -9,22 +9,29 @@ class Producto extends Model
 {
     use HasFactory;
     protected $table = 'producto';
-    protected $primarykey = 'id_producto';
-    protected $fillable = ['id_negocio','nombre','descrip','precio','id_categoria'];
+    protected $primarykey = 'producto_id';
+    public $timestamps = false;
+    protected $fillable = [
+        'negocio_id',
+        'nombre',
+        'descrip',
+        'precio',
+        'categoria_id'
+    ];
 
     public function promocion()
     {
-        return $this->hasMany(Promocion::class, 'id_promocion', 'id_promocion');
+        return $this->hasMany(Promocion::class, 'promocion_id', 'promocion_id');
     }
 
     public function negocio()
     {
-        return $this->belongsTo(Negocio::class, 'id_negocio', 'id_negocio');
+        return $this->belongsTo(Negocio::class, 'negocio_id', 'negocio_id');
     }
 
     public function categoria()
     {
-        return $this->belongsTo(Categoria::class, 'id_categoria', 'id_categoria');
+        return $this->belongsTo(Categoria::class, 'categoria_id', 'categoria_id');
     }
 
 }

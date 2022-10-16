@@ -9,13 +9,21 @@ class Promocion extends Model
 {
     use HasFactory;
     protected $table = 'promocion';
-    protected $primarykey = 'id_promocion';
-    protected $fillable = ['id_producto','descuento','fecha_ini','fecha_fin',
-                        'hora_ini','hora_fin', 'ubicacion'];
+    protected $primarykey = 'promocion_id';
+    public $timestamps = false;
+    protected $fillable = [
+        'producto_id',
+        'descuento',
+        'fecha_ini',
+        'fecha_fin',
+        'hora_ini',
+        'hora_fin', 
+        'ubicacion'
+    ];
 
     public function producto()
     {
-        return $this->belongsTo(Producto::class, 'id_Producto', 'id_Producto');
+        return $this->belongsTo(Producto::class, 'producto_id', 'producto_id');
     }
 
     // relacion muchos a uno

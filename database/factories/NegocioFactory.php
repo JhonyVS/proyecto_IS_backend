@@ -17,7 +17,7 @@ class NegocioFactory extends Factory
     public function definition()
     {
         return [
-            'id_usuario'    => $this->faker->unique()->numberBetween(1,100),
+            'usuario_id'    => $this->faker->unique()->numberBetween(1,100),
             'nombre'        => $this->faker->name(),
             'descrip'       => $this->faker->sentence(),
             'ubicacion'     => $this->faker->name(),

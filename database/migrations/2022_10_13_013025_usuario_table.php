@@ -14,14 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('usuario', function (Blueprint $table) {
-            $table->bigIncrements('id_usuario');
+            $table->engine = 'InnoDB';
+            $table->id('usuario_id');
             $table->string('nombre');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            // $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->bigInteger('telefono');
             //$table->rememberToken();
-            $table->timestamps();
+            // $table->timestamps();
         });
     }
 

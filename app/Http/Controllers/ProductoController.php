@@ -57,9 +57,6 @@ class ProductoController extends Controller
       $messages = [
         'required' => 'El campo :attribute es obligatorio',
         'unique' => 'El nombre :input ya fue tomado',
-        // 'equipos.*.preinscripcion_numero_de_deposito.unique' => 'El numero de transaccion :input ya uso en otro equipo',
-        // 'equipos.*.categoria.required' => 'Debe seleccionar una categoria',
-        // 'equipo_nacionalidad.required' => 'Debe seleccionar una nacionalidad'
       ];
     
       $request->validate([
@@ -77,24 +74,24 @@ class ProductoController extends Controller
       ], $messages);
 
       $product = Producto::create([
-        'id_negocio' => $request->negocio_id,
-        'id_categoria' => $request->producto_categoria,
+        'negocio_id' => $request->negocio_id,
+        'categoria_id' => $request->producto_categoria,
         'nombre' => $request->producto_nombre,
         'descrip' => $request->producto_descripcion,
-        'precio' => $request->producto_precio
+        'precio' => $request->producto_precio,
+        'activo' => 1
         //'url_imagen' => $request->producto_url_imagen
       ]);
       // // echo "hola".$producto->id_producto;
-
       Promocion::create([
-        'id_producto' => $product->id_producto,
         'descuento' => $request->promocion_descuento,
         //'descuento_nombre' => $request->descuento_nombre,
         'fecha_ini' => $request->promocion_fecha_inicio,
         'fecha_fin' => $request->promocion_fecha_fin,
         'hora_ini' => $request->promocion_hora_inicio,
         'hora_fin' => $request->promocion_hora_fin,
-        'ubicacion' => $request->promocion_ubicacion
+        'ubicacion' => $request->promocion_ubicacion,
+        'producto_id' => $product->id
       ]);
 
       

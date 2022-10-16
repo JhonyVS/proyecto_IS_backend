@@ -9,14 +9,25 @@ class Usuario extends Model
 {
     use HasFactory;
     protected $table = 'usuario';
-    protected $primarykey = 'id_usuario';
-    protected $fillable = ['nombre','email','password','telefono'];
-    protected $hidden   = ['password','remember_token'];
-    protected $casts = ['email_verified_at' => 'datetime'];
+    protected $primarykey = 'usuario_id';
+    public $timestamps = false;
+    protected $fillable = [
+        'nombre',
+        'email',
+        'password',
+        'telefono'
+    ];
+    protected $hidden   = [
+        'password',
+        'remember_token'
+    ];
+    // protected $casts = [
+    //     'email_verified_at' => 'datetime'
+    // ];
 
     public function negocio()
     {
-        return $this->hasMany(Negocio::class, 'id_Negocio', 'id_Negocio');
+        return $this->hasMany(Negocio::class, 'negocio_id', 'negocio_id');
     }
 
     //relacion uno a muchos

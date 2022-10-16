@@ -17,7 +17,7 @@ class PromocionFactory extends Factory
     public function definition()
     {
         return [
-            'id_producto'   => $this->faker->numberBetween(1,100),
+            'producto_id'   => $this->faker->numberBetween(1,100),
             'descuento'     => $this->faker->randomFloat(2,1,5),
             'ubicacion'     => $this->faker->name(),
             'fecha_ini'      => $this->faker->date(),

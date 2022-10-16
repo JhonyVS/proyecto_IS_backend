@@ -14,10 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('categoria', function (Blueprint $table) {
-            $table->bigIncrements('id_categoria');
+            $table->engine = 'InnoDB';
+            $table->id('categoria_id');
             $table->string('nombre',30);
             $table->string('descrip',100)->nullable();
-            $table->timestamps();
+            // $table->timestamps();
         });
     }
 

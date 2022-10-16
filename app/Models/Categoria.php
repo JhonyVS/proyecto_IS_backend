@@ -9,12 +9,16 @@ class Categoria extends Model
 {
     use HasFactory;
     protected $table = 'categoria';
-    protected $primarykey = 'id_categoria';
-    protected $fillable = ['nombre','descrip'];
+    protected $primarykey = 'categoria_id';
+    protected $fillable = [
+        'nombre',
+        'descrip'
+    ];
+    public $timestamps = false;
     
     public function producto()
     {
-        return $this->hasMany(Producto::class, 'id_Producto', 'id_Producto');
+        return $this->hasMany(Producto::class, 'producto_id', 'producto_id');
     }
     //relacion uno a muchos
     // public function productos(){
