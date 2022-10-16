@@ -35,8 +35,34 @@ class NegocioController extends Controller
      */
     public function store(Request $request)
     {
-        $negocio = new Negocio($request->input());
-        $negocio->save();
+      $messages = [
+        'required' => 'El campo :attribute es obligatorio',
+        'unique' => 'El nombre :input ya fue tomado'
+      ];
+  
+      $request->validate([
+        'id_usuario' => 'required',
+        'nombre' => 'required|min:3|max:64',
+        //'producto_ubicacion' => 'required|min:5|max:50',
+        'descrip' => 'required|min:5|max:255',
+        'ubicacion' => 'required|min:10|max:255',
+        'telefono' => 'required|min:5|max:20',
+        'horario_inicio' => 'required',
+        'horario_cierre' => 'required'
+      ], $messages);
+
+      Negocio::create([
+        'usuario_id' => $request->id_usuario,
+        'nombre' => $request->nombre,
+        'descrip' => $request->descrip,
+        'ubicacion' => $request->ubicacion,
+        'telefono' => $request->telefono,
+        'horario_inicio' => $request->horario_inicio,
+        'horario_cierre' => $request->horario_cierre
+      ]);
+
+      // $negocio = new Negocio($request->input());
+      // $negocio->save();
         //
     }
 
