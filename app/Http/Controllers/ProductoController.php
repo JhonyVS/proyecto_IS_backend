@@ -21,15 +21,15 @@ class ProductoController extends Controller
     {
       $hoy = Carbon::today();
       $productos = DB::table('producto')
-        ->leftJoin('promocion', 'promocion.id_Producto', '=', 'producto.id_Producto')
+        ->leftJoin('promocion', 'promocion.id_producto', '=', 'producto.id_producto')
         // ->where('fechaFin', '>', $hoy)
         // ->whereIn('fechaFin', '>', $hoy)
         ->select(
-          'producto.id_Producto',
-          'categoria',
+          'producto.id_producto',
+          'id_categoria',
           'nombre',
           'precio',
-          'fechaFin'
+          'fecha_fin'
         )
         ->get();
       return $productos;
@@ -76,43 +76,24 @@ class ProductoController extends Controller
         'negocio_id' => 'required'
       ], $messages);
 
-      // //usuario estático
-      // $pass = "mypass1234";
-      // $usuario = Usuario::create([
-      //   'nombre' => "usuario de ejemplo 1",
-      //   'email' => "example@mail.com",
-      //   'password' => $pass,
-      //   // 'password' => bcrypt($pass),
-      //   'telefono' => 69435673
-      // ]);
-
-      // //negocio estatico
-
-      // $negocio = Negocio::create([
-      //   'id_Usuario' => $usuario->id_Usuario,
-      //   'nombre' => "negocio de ejemplo",
-      //   'ubicacion' => "ubicacion de ejemplo",
-      //   'telefono' => 77665544,
-      //   'activo' => 1
-      // ]);
-
-      $producto = Producto::create([
-        'id_Negocio' => $request->negocio_id,
-        'categoria' => $request->producto_categoria,
+      $product = Producto::create([
+        'id_negocio' => $request->negocio_id,
+        'id_categoria' => $request->producto_categoria,
         'nombre' => $request->producto_nombre,
         'descrip' => $request->producto_descripcion,
         'precio' => $request->producto_precio
         //'url_imagen' => $request->producto_url_imagen
       ]);
+      // // echo "hola".$producto->id_producto;
 
       Promocion::create([
-        'id_Producto' => $producto->id_Producto,
+        'id_producto' => $product->id_producto,
         'descuento' => $request->promocion_descuento,
         //'descuento_nombre' => $request->descuento_nombre,
-        'fechaIni' => $request->promocion_fecha_inicio,
-        'fechaFin' => $request->promocion_fecha_fin,
-        'horaIni' => $request->promocion_hora_inicio,
-        'horaFin' => $request->promocion_hora_fin,
+        'fecha_ini' => $request->promocion_fecha_inicio,
+        'fecha_fin' => $request->promocion_fecha_fin,
+        'hora_ini' => $request->promocion_hora_inicio,
+        'hora_fin' => $request->promocion_hora_fin,
         'ubicacion' => $request->promocion_ubicacion
       ]);
 

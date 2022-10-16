@@ -17,13 +17,13 @@ class NegocioFactory extends Factory
     public function definition()
     {
         return [
-            'id_Usuario'    => $this->faker->unique()->numberBetween(1,100),
+            'id_usuario'    => $this->faker->unique()->numberBetween(1,100),
             'nombre'        => $this->faker->name(),
             'descrip'       => $this->faker->sentence(),
             'ubicacion'     => $this->faker->name(),
             'telefono'      => $this->faker->numberBetween(4123456,4987653),
-            'horarioInicio'    => $this->faker->time(),
-            'horarioCierre'    => $this->faker->time()
+            'horario_inicio'    => $this->faker->time(),
+            'horario_cierre'    => $this->faker->time()
         ];
     }
 }
