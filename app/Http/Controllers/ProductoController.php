@@ -21,12 +21,12 @@ class ProductoController extends Controller
     {
       $hoy = Carbon::today();
       $productos = DB::table('producto')
-        ->leftJoin('promocion', 'promocion.id_producto', '=', 'producto.id_producto')
+        ->leftJoin('promocion', 'promocion.producto_id', '=', 'producto.producto_id')
         // ->where('fechaFin', '>', $hoy)
         // ->whereIn('fechaFin', '>', $hoy)
         ->select(
-          'producto.id_producto',
-          'id_categoria',
+          'producto.producto_id',
+          'categoria_id',
           'nombre',
           'precio',
           'fecha_fin'
