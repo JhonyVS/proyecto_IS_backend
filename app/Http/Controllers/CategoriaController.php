@@ -14,7 +14,7 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        return DB::table('categoria')->select('nombre')->get();
+        return DB::table('categoria')->select('nombre', 'categoria_id')->get();
         //
     }
 
