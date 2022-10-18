@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('telefono')->nullable();
             $table->time('horario_inicio')->default('00:00:00');
             $table->time('horario_cierre')->default('00:00:00');
+            $table->string('imagen_url')->default('invalido');
 
             $table->boolean('activo')->default(1);//TRUE HASTA QUE LO DESACTIVE EL DUEÑO
 

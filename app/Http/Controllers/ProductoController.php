@@ -70,8 +70,16 @@ class ProductoController extends Controller
         'promocion_fecha_fin' => 'required',
         'promocion_hora_inicio' => 'required',
         'promocion_hora_fin' => 'required',
-        'negocio_id' => 'required'
+        'negocio_id' => 'required',
+        'photo' => 'required'
       ], $messages);
+
+      $img_url = "invalido";
+      if ($request->file('photo')->isValid()) {
+        $nombre = "negocio_numero_".$request->id_usuario.".jpg";
+        $path = $request->photo->storeAs('images', $nombre);
+        $img_url = $path;
+      }
 
       $product = Producto::create([
         'negocio_id' => $request->negocio_id,
@@ -79,6 +87,7 @@ class ProductoController extends Controller
         'nombre' => $request->producto_nombre,
         'descrip' => $request->producto_descripcion,
         'precio' => $request->producto_precio,
+        'imagen_url' => $img_url,
         'activo' => 1
         //'url_imagen' => $request->producto_url_imagen
       ]);

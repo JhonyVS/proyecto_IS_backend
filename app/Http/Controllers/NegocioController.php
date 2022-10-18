@@ -48,8 +48,16 @@ class NegocioController extends Controller
         'ubicacion' => 'required|min:10|max:255',
         'telefono' => 'required|min:5|max:20',
         'horario_inicio' => 'required',
-        'horario_cierre' => 'required'
+        'horario_cierre' => 'required',
+        'photo' => 'required'
       ], $messages);
+
+      $img_url = "invalido";
+      if ($request->file('photo')->isValid()) {
+        $nombre = "negocio_numero_".$request->id_usuario.".jpg";
+        $path = $request->photo->storeAs('images', $nombre);
+        $img_url = $path;
+      }
 
       Negocio::create([
         'usuario_id' => $request->id_usuario,
@@ -58,7 +66,8 @@ class NegocioController extends Controller
         'ubicacion' => $request->ubicacion,
         'telefono' => $request->telefono,
         'horario_inicio' => $request->horario_inicio,
-        'horario_cierre' => $request->horario_cierre
+        'horario_cierre' => $request->horario_cierre,
+        'imagen_url' => $img_url
       ]);
 
       // $negocio = new Negocio($request->input());
