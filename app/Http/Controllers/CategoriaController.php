@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +15,7 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        return DB::table('categoria')->select('nombre', 'categoria_id')->get();
+        return Categoria::all();
         //
     }
 

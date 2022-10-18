@@ -24,7 +24,7 @@ class Negocio extends Model
 
     public function producto()
     {
-        return $this->hasMany(Producto::class, 'producto_id', 'producto_id');
+        return $this->hasMany(Producto::class, 'id', 'producto_id');
     }
 
     public function usuario()

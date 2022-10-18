@@ -15,9 +15,7 @@ return new class extends Migration
     {
         Schema::create('categoria', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->id('categoria_id');
-            $table->string('nombre',30);
-            $table->string('descrip',100)->nullable();
+            $table->string('categoria')->primary();
             // $table->timestamps();
         });
     }

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('negocio', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->id('negocio_id');
+            $table->id();
             // $table->unsignedBigInteger('id_usuario');
             $table->string('nombre',30);
             $table->string('descrip',100);
@@ -29,7 +29,7 @@ return new class extends Migration
 
             // $table->timestamps();
             // $table->foreign('id_usuario')->references('id_usuario')->on('usuario');
-            $table->foreignId('usuario_id')->constrained('usuario', 'usuario_id');
+            $table->foreignId('usuario_id')->constrained('usuario', 'id');
         });
     }
 

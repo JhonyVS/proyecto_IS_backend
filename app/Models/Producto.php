@@ -17,22 +17,22 @@ class Producto extends Model
         'descrip',
         'precio',
         'imagen_url',
-        'categoria_id'
+        'categoria'
     ];
 
     public function promocion()
     {
-        return $this->hasMany(Promocion::class, 'promocion_id', 'promocion_id');
+        return $this->hasMany(Promocion::class, 'id', 'promocion_id');
     }
 
     public function negocio()
     {
-        return $this->belongsTo(Negocio::class, 'negocio_id', 'negocio_id');
+        return $this->belongsTo(Negocio::class, 'id', 'negocio_id');
     }
 
     public function categoria()
     {
-        return $this->belongsTo(Categoria::class, 'categoria_id', 'categoria_id');
+        return $this->belongsTo(Categoria::class, 'categoria', 'categoria');
     }
 
 }

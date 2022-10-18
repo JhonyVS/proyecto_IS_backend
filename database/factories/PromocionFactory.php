@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Producto;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,7 @@ class PromocionFactory extends Factory
     public function definition()
     {
         return [
-            'producto_id'   => $this->faker->numberBetween(1,100),
+            'producto_id'   => $this->faker->randomElement(Producto::pluck('id')),
             'descuento'     => $this->faker->randomFloat(2,1,5),
             'ubicacion'     => $this->faker->name(),
             'fecha_ini'      => $this->faker->date(),

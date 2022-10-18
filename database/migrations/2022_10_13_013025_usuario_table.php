@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('usuario', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->id('usuario_id');
+            $table->id();
             $table->string('nombre');
             $table->string('email')->unique();
             // $table->timestamp('email_verified_at')->nullable();

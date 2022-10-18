@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Categoria;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,11 +15,12 @@ class ProductoFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
     public function definition()
     {
         return [
             'negocio_id'    => $this->faker->numberBetween(1,100),
-            'categoria_id'     => $this->faker->numberBetween(1,7),
+            'categoria'     => $this->faker->randomElement(Categoria::pluck('categoria')),
             'nombre'        => $this->faker->title(),
             'descrip'       => $this->faker->sentence(),
             'precio'        => $this->faker->randomFloat(2,1,20),

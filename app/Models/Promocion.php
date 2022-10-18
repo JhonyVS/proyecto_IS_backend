@@ -23,7 +23,7 @@ class Promocion extends Model
 
     public function producto()
     {
-        return $this->belongsTo(Producto::class, 'producto_id', 'producto_id');
+        return $this->belongsTo(Producto::class, 'id', 'producto_id');
     }
 
     // relacion muchos a uno

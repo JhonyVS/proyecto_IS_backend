@@ -15,7 +15,7 @@ return new class extends Migration
     {
       Schema::create('promocion', function (Blueprint $table) {
         $table->engine = 'InnoDB';
-        $table->id('promocion_id');
+        $table->id();
         // $table->unsignedBigInteger('id_producto');
         $table->double('descuento','15,2')->nullable();
         $table->date('fecha_ini')->nullable();
@@ -28,7 +28,7 @@ return new class extends Migration
         //$table->string('imgURL',230); *******PENDIENTEE******
         // $table->timestamps(); 
         // $table->foreign('id_producto')->references('id_producto')->on('producto');
-        $table->foreignId('producto_id')->constrained('producto', 'producto_id');
+        $table->foreignId('producto_id')->constrained('producto', 'id');
       });
     }
 

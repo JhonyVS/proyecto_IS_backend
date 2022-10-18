@@ -20,13 +20,14 @@ class ProductoController extends Controller
     public function index()
     {
       $hoy = Carbon::today();
+      // return Producto::all();
       $productos = DB::table('producto')
-        ->leftJoin('promocion', 'promocion.producto_id', '=', 'producto.producto_id')
+        ->leftJoin('promocion', 'promocion.producto_id', '=', 'producto.id')
         // ->where('fechaFin', '>', $hoy)
         // ->whereIn('fechaFin', '>', $hoy)
         ->select(
-          'producto.producto_id',
-          'categoria_id',
+          'producto.id',
+          'categoria',
           'nombre',
           'precio',
           'fecha_fin'
@@ -74,24 +75,24 @@ class ProductoController extends Controller
         'photo' => 'required'
       ], $messages);
 
-      $img_url = "invalido";
-      if ($request->file('photo')->isValid()) {
-        $nombre = "negocio_numero_".$request->id_usuario.".jpg";
-        $path = $request->photo->storeAs('images', $nombre);
-        $img_url = $path;
-      }
-
+      
       $product = Producto::create([
         'negocio_id' => $request->negocio_id,
-        'categoria_id' => $request->producto_categoria,
+        'categoria' => $request->producto_categoria,
         'nombre' => $request->producto_nombre,
         'descrip' => $request->producto_descripcion,
         'precio' => $request->producto_precio,
-        'imagen_url' => $img_url,
         'activo' => 1
-        //'url_imagen' => $request->producto_url_imagen
+        // 'imagen_url' => $path
       ]);
+      $extension = $request->file('photo')->getClientOriginalExtension();
+      $nombre = "producto_id_numero_".$product->id.".".$extension;
+      $path = $request->photo->storeAs('images', $nombre);
+      $product->imagen_url = $path;
+      $product->save();
       // // echo "hola".$producto->id_producto;
+      // $img_url = "invalido";
+
       Promocion::create([
         'descuento' => $request->promocion_descuento,
         //'descuento_nombre' => $request->descuento_nombre,
@@ -102,7 +103,7 @@ class ProductoController extends Controller
         'ubicacion' => $request->promocion_ubicacion,
         'producto_id' => $product->id
       ]);
-
+      
       
       
       // $token = $usuario->createToken("compromiso")->plainTextToken;

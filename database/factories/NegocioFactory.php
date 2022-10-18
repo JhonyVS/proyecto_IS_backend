@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Usuario;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,7 @@ class NegocioFactory extends Factory
     public function definition()
     {
         return [
-            'usuario_id'    => $this->faker->unique()->numberBetween(1,100),
+            'usuario_id'    => $this->faker->randomElement(Usuario::pluck('id')),
             'nombre'        => $this->faker->name(),
             'descrip'       => $this->faker->sentence(),
             'ubicacion'     => $this->faker->name(),

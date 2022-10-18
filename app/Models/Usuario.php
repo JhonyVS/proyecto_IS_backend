@@ -27,7 +27,7 @@ class Usuario extends Model
 
     public function negocio()
     {
-        return $this->hasMany(Negocio::class, 'negocio_id', 'negocio_id');
+        return $this->hasMany(Negocio::class, 'id', 'negocio_id');
     }
 
     //relacion uno a muchos
