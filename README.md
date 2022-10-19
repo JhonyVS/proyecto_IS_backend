@@ -35,4 +35,4 @@ php artisan serve -> para encender el servidor
 
 
 
-Todas las imágenes subidas se guardan en la carpeta storage/images/
+Todas las imágenes subidas se guardan en la carpeta backend-descuentos/storage/app/images/
