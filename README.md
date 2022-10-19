@@ -11,7 +11,6 @@
 //Desde la terminal 
 +git clone https://github.com/kw3a/backend-descuentos.git
 +cd backend-descuentos
-+git switch integracion 
 +composer install
 +cp .env.example .env -> para linux  (Solo debe hacerse en caso de no tener el archivo .env)
 +copiar y pegar .env.example en el mismo directorio, y renombrar la copia como .env -> para windows  (Solo debe hacerse en caso de no tener el archivo .env)
