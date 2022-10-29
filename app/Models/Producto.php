@@ -10,7 +10,7 @@ class Producto extends Model
     use HasFactory;
     protected $table = 'producto';
     protected $primarykey = 'id_Producto';
-    protected $fillable = ['id_Negocio','nombre','descrip','precio','categoria'];
+    protected $fillable = ['id_Negocio','nombre','descrip','precio','categoria','imagen_producto'];
 
 
     // relacion muchos a uno

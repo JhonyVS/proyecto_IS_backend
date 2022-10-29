@@ -22,6 +22,7 @@ return new class extends Migration
             $table->time('horaIni')->default('00:00:00')->nullable();
             $table->time('horaFin')->default('00:00:00')->nullable();
             $table->string('ubicacion',50)->nullable();
+            $table->string('imagen_promocion',150)->nullable();
 
             $table->boolean('activo')->default(1);
             //$table->string('imgURL',230); *******PENDIENTEE******

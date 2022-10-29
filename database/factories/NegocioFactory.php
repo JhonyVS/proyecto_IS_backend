@@ -23,7 +23,8 @@ class NegocioFactory extends Factory
             'ubicacion'     => $this->faker->name(),
             'telefono'      => $this->faker->numberBetween(4123456,4987653),
             'horarioInicio'    => $this->faker->time(),
-            'horarioCierre'    => $this->faker->time()
+            'horarioCierre'    => $this->faker->time(),
+            'imagen_negocio'=> $this->faker->url()
         ];
     }
 }

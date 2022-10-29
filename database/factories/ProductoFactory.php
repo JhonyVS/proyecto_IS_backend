@@ -22,6 +22,7 @@ class ProductoFactory extends Factory
             'nombre'        => $this->faker->title(),
             'descrip'       => $this->faker->sentence(),
             'precio'        => $this->faker->randomFloat(2,1,20),
+            'imagen_producto'=> $this->faker->url()
         ];
     }
 }

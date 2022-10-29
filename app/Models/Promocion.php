@@ -11,7 +11,7 @@ class Promocion extends Model
     protected $table = 'promocion';
     protected $primarykey = 'id_Promocion';
     protected $fillable = ['id_Producto','descuento','ubicacion','fechaIni','fechaFin',
-                        'horaIni','horaFin'];
+                        'horaIni','horaFin','imagen_promocion'];
 
     // relacion muchos a uno
     public function productos(){

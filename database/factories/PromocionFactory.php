@@ -24,6 +24,7 @@ class PromocionFactory extends Factory
             'fechaFin'      => $this->faker->date(),
             'horaIni' => $this->faker->time(),
             'horaFin' => $this->faker->time(),
+            'imagen_promocion' => $this->faker->url()
         ];
     }
 }

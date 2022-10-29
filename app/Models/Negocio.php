@@ -11,7 +11,7 @@ class Negocio extends Model
     protected $table = 'negocio';
     protected $primarykey = 'id_Negocio';
     protected $fillable = ['id_Usuario','nombre','descrip','ubicacion',
-                            'telefono','horarioInicio','horarioCierre'];
+                            'telefono','horarioInicio','horarioCierre','imagen_negocio'];
 
 
 

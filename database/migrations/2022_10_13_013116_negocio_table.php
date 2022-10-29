@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('nombre',30);
             $table->string('descrip',100);
             $table->string('ubicacion',50);
+            $table->string('imagen_negocio',150)->nullable();
             $table->unsignedBigInteger('telefono')->nullable();
             $table->time('horarioInicio')->default('00:00:00');
             $table->time('horarioCierre')->default('00:00:00');
