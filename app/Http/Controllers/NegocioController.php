@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Negocio;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 
 class NegocioController extends Controller
@@ -41,30 +42,37 @@ class NegocioController extends Controller
       ];
   
       $request->validate([
-        'id_usuario' => 'required',
-        'nombre' => 'required|min:3|max:64',
-        //'producto_ubicacion' => 'required|min:5|max:50',
-        'descrip' => 'required|min:5|max:255',
+        'nombre_negocio' => 'required|min:3|max:64',
+        'nombre_propietario' => 'required|min:4|max:64',
+        'logo' => 'required',
         'ubicacion' => 'required|min:10|max:255',
+        'descrip' => 'required|min:5|max:255',
         'telefono' => 'required|min:5|max:20',
-        'horario_inicio' => 'required',
-        'horario_cierre' => 'required',
-        'photo' => 'required'
+        'hora_apertura' => 'required',
+        'hora_cierre' => 'required',
+        'nick' => 'required|min:4|max:32|unique:usuario',
+        'contrasena' => 'required|min:4|max:32'
       ], $messages);
 
+      $user = Usuario::create([
+        'nombre' => $request->nombre_propietario,
+        'nick' => $request->nick,
+        'password' => bcrypt($request->contrasena),
+        'telefono' => $request->telefono
+      ]);
+
       $negocio = Negocio::create([
-        'usuario_id' => $request->id_usuario,
-        'nombre' => $request->nombre,
+        'usuario_id' => $user->id,
+        'nombre' => $request->nombre_negocio,
         'descrip' => $request->descrip,
         'ubicacion' => $request->ubicacion,
-        'telefono' => $request->telefono,
-        'horario_inicio' => $request->horario_inicio,
-        'horario_cierre' => $request->horario_cierre
+        'horario_inicio' => $request->hora_apertura,
+        'horario_cierre' => $request->hora_cierre
       ]);
       
-      $extension = $request->file('photo')->getClientOriginalExtension();
-      $nombre = "negocio_id_numero_".$negocio->id.".".$extension;
-      $path = $request->photo->storeAs('images', $nombre);
+      $extension = $request->file('logo')->getClientOriginalExtension();
+      $nombre = "logo_negocio_id_".$negocio->id.".".$extension;
+      $path = $request->logo->storeAs('images', $nombre);
       $negocio->imagen_url = $path;
       $negocio->save();
 
