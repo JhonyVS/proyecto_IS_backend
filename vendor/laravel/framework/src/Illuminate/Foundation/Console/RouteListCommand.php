@@ -103,7 +103,7 @@ class RouteListCommand extends Command
     {
         $this->router->flushMiddlewareGroups();
 
-        if (! $this->router->getRoutes()->count()) {
+        if (! $this->router->getRoutes()->getRoutes()) {
             return $this->components->error("Your application doesn't have any routes.");
         }
 

@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Sanctum\HasApiTokens;
 
 class Usuario extends Model
 {
-    use HasFactory;
+    use HasFactory, HasApiTokens;
     protected $table = 'usuario';
     protected $primarykey = 'usuario_id';
     public $timestamps = false;
@@ -17,12 +18,9 @@ class Usuario extends Model
         'password',
         'telefono'
     ];
-    protected $hidden   = [
-        'password',
-        'remember_token'
-    ];
-    // protected $casts = [
-    //     'email_verified_at' => 'datetime'
+    // protected $hidden   = [
+    //     'password',
+    //     'remember_token'
     // ];
 
     public function negocio()
