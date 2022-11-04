@@ -28,7 +28,7 @@ class UsuarioSeeder extends Seeder
         $usuario->nick = "prueba";
         $usuario->nombre = "usuario_prueba";
         $usuario->telefono = "123802398";
-        $usuario->password = "pass1234";
+        $usuario->password = bcrypt("pass1234");
         $usuario->save();
         Usuario::factory(100)->create();
     }
