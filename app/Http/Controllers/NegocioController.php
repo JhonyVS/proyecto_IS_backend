@@ -40,12 +40,15 @@ class NegocioController extends Controller
     $user = Usuario::where('nick', $request->nick)->first();
 
     if (!$user || !Hash::check($request->password, $user->password)) {
-      return response(['login' => 'El nick o la contraseña son incorrectos']);
+      return response([
+        'status' => false,
+        'login' => 'El nick o la contraseña son incorrectos']);
     }
 
     $token = $user->createToken("descuentos")->plainTextToken;
 
     $response = [
+      'status' => true,
       'usuario_id' => $user->id,
       'token' => $token
     ];
