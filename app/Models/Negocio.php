@@ -17,7 +17,7 @@ class Negocio extends Model
         'descrip',
         'ubicacion',
         'telefono',
-        'imagen_url',
+        'imagen',
         'horario_inicio',
         'horario_cierre'
     ];

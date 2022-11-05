@@ -15,6 +15,14 @@ class ProductoSeeder extends Seeder
      */
     public function run()
     {
-        Producto::factory(100)->create();
+        Producto::create([
+            'negocio_id' => 1,
+            'nombre' => "hamburguesa doble con queso",
+            'descrip' => "hamburguesa que contiene dos carnes, cebolla, tomate, aderesos, queso y papas",
+            'precio' => "15.50",
+            'imagen' => "ejemplo2.jpg",
+            'categoria' => "Hamburguesa"
+        ]);
+        // Producto::factory(100)->create();
     }
 }

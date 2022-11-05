@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Categoria;
+use App\Models\Negocio;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +20,7 @@ class ProductoFactory extends Factory
     public function definition()
     {
         return [
-            'negocio_id'    => $this->faker->numberBetween(1,100),
+            'negocio_id'    => $this->faker->randomElement(Negocio::pluck('id')),
             'categoria'     => $this->faker->randomElement(Categoria::pluck('categoria')),
             'nombre'        => $this->faker->title(),
             'descrip'       => $this->faker->sentence(),

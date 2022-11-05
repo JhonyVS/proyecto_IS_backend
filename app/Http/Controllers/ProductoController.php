@@ -23,16 +23,15 @@ class ProductoController extends Controller
       // return Producto::all();
       $productos = DB::table('producto')
         ->leftJoin('promocion', 'promocion.producto_id', '=', 'producto.id')
-        // ->where('fechaFin', '>', $hoy)
-        // ->whereIn('fechaFin', '>', $hoy)
         ->select(
           'producto.id',
           'categoria',
           'nombre',
           'precio',
-          'fecha_fin'
+          'fecha_fin',
+          'imagen'
         )
-        ->get();
+        ->paginate();
       return $productos;
         //
     }
@@ -72,26 +71,27 @@ class ProductoController extends Controller
         'promocion_hora_inicio' => 'required',
         'promocion_hora_fin' => 'required',
         'negocio_id' => 'required',
-        'photo' => 'required'
+        'photo' => 'required|image|mimes:jpeg,png,jpg|max:1024'
       ], $messages);
 
-      
+      if ($request->hasFile(('photo'))) {
+        $image = $request->file('photo');
+        $destinationPath = 'productos/';
+        $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+        $image->move($destinationPath, $profileImage);
+        $request['photo'] = "$profileImage";
+        // $input['image'] = "$profileImage";
+      }
+
       $product = Producto::create([
         'negocio_id' => $request->negocio_id,
         'categoria' => $request->producto_categoria,
         'nombre' => $request->producto_nombre,
         'descrip' => $request->producto_descripcion,
         'precio' => $request->producto_precio,
-        'activo' => 1
-        // 'imagen_url' => $path
+        'activo' => 1,
+        'imagen' => $request->photo
       ]);
-      $extension = $request->file('photo')->getClientOriginalExtension();
-      $nombre = "producto_id_numero_".$product->id.".".$extension;
-      $path = $request->photo->storeAs('images', $nombre);
-      $product->imagen_url = $path;
-      $product->save();
-      // // echo "hola".$producto->id_producto;
-      // $img_url = "invalido";
 
       Promocion::create([
         'descuento' => $request->promocion_descuento,
@@ -104,15 +104,6 @@ class ProductoController extends Controller
         'producto_id' => $product->id
       ]);
       
-      
-      
-      // $token = $usuario->createToken("compromiso")->plainTextToken;
-      
-      // $response = [
-      //   'usuario_id' => $usuario->usuario_id,
-      //   'token' => $token
-      // ];
-      // return response($response);
     }
 
     /**

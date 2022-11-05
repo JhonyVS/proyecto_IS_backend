@@ -15,17 +15,18 @@ class NegocioSeeder extends Seeder
      */
     public function run()
     {
-        //
-        //$var = new Negocio();
-        //$var->id_Usuario=1;
-        //$var->nombre="Pizzeria Turin";
-        //$var->descrip="descripcion.....";
-        //$var->ubicacion="ubicacion....";
-        //$var->telefono=4453902;
-        //$var->horarioInicio='18:00:00';
-        //$var->horarioCierre='23:00:00';
-        //$var->save();
-        Negocio::factory(100)->create();
+        // Negocio::factory(100)->create();
+
+        Negocio::create([
+            'usuario_id' => 1,
+            'nombre' => "Burger king",
+            'descrip' => "Negocio de hamburguesas",
+            'ubicacion' => "Calle Esteban Arce y Tarata #123",
+            'telefono' => "54365676",
+            'imagen' => "ejemplo.jpg",
+            'horario_inicio' => "12:00",
+            'horario_cierre' => "18:00"
+        ]);
 
     }
 }

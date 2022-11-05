@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('categoria', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->string('categoria')->primary();
-            // $table->timestamps();
         });
     }
 

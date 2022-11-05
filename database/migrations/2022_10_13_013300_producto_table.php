@@ -16,21 +16,14 @@ return new class extends Migration
       Schema::create('producto', function (Blueprint $table) {
         $table->engine = 'InnoDB';
         $table->id();
-        // $table->unsignedBigInteger('id_negocio');
-        // $table->unsignedBigInteger('id_categoria');
         $table->string('nombre',30);
         $table->string('descrip',100)->nullable();
-        $table->double('precio','15,2');// 15 # antes de la coma y 2 # despues de la coma
+        $table->double('precio','15,2');
         $table->boolean('activo')->default(1);
-        $table->string('imagen_url')->default('invalido');;
-        //$table->string('imgURL',230); *******PENDIENTEE******
-        // $table->timestamps(); 
+        $table->string('imagen');
         $table->string('categoria');
         $table->foreign('categoria')->references('categoria')->on('categoria');
-        // $table->foreignId('categoria_id')->constrained('categoria', 'id');
         $table->foreignId('negocio_id')->constrained('negocio', 'id');
-        // $table->foreign('id_negocio')->references('id_negocio')->on('negocio');
-        // $table->foreign('id_categoria')->references('id_categoria')->on('categoria');
       });
     }
 

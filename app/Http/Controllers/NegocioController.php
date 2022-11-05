@@ -72,9 +72,9 @@ class NegocioController extends Controller
     $request->validate([
       'nombre_negocio' => 'required|min:3|max:64',
       'nombre_propietario' => 'required|min:4|max:64',
-      'logo' => 'required',
+      'logo' => 'required|image|mimes:jpeg,png,jpg|max:1024',
       'ubicacion' => 'required|min:10|max:255',
-      'descrip' => 'required|min:5|max:255',
+      'descrip' => 'required|min:5|max:256',
       'telefono' => 'required|min:5|max:20',
       'hora_apertura' => 'required',
       'hora_cierre' => 'required',
@@ -89,20 +89,29 @@ class NegocioController extends Controller
       'telefono' => $request->telefono
     ]);
 
-    $negocio = Negocio::create([
+    if ($image = $request->file('logo')) {
+      $destinationPath = 'images/';
+      $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+      $image->move($destinationPath, $profileImage);
+      $request['logo'] = "$profileImage";
+      // $input['image'] = "$profileImage";
+    }
+
+    Negocio::create([
       'usuario_id' => $user->id,
       'nombre' => $request->nombre_negocio,
       'descrip' => $request->descrip,
       'ubicacion' => $request->ubicacion,
       'horario_inicio' => $request->hora_apertura,
-      'horario_cierre' => $request->hora_cierre
+      'horario_cierre' => $request->hora_cierre,
+      'imagen' => $request->logo
     ]);
     
-    $extension = $request->file('logo')->getClientOriginalExtension();
-    $nombre = "logo_negocio_id_".$negocio->id.".".$extension;
-    $path = $request->logo->storeAs('images', $nombre);
-    $negocio->imagen_url = $path;
-    $negocio->save();
+    // $extension = $request->file('logo')->getClientOriginalExtension();
+    // $nombre = "logo_negocio_id_".$negocio->id.".".$extension;
+    // $path = $request->logo->storeAs('images', $nombre);
+    // $negocio->imagen_url = $path;
+    // $negocio->save();
 
     $token = $user->createToken("descuentos")->plainTextToken;
     $response = [
