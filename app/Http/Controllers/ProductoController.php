@@ -30,7 +30,9 @@ class ProductoController extends Controller
           'categoria',
           'nombre',
           'precio',
-          'fecha_fin'
+          'descuento',
+          'fecha_fin',
+          'imagen_url'
         )
         ->get();
       return $productos;
