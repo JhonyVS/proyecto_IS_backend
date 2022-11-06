@@ -8,7 +8,8 @@ use App\Models\Promocion;
 use App\Models\Negocio;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon; 
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
 {
@@ -28,10 +29,12 @@ class ProductoController extends Controller
           'categoria',
           'nombre',
           'precio',
+          'descuento',
           'fecha_fin',
           'imagen'
         )
-        ->paginate();
+        ->get();
+        // ->paginate();
       return $productos;
         //
     }
@@ -74,14 +77,7 @@ class ProductoController extends Controller
         'photo' => 'required|image|mimes:jpeg,png,jpg|max:1024'
       ], $messages);
 
-      if ($request->hasFile(('photo'))) {
-        $image = $request->file('photo');
-        $destinationPath = 'productos/';
-        $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-        $image->move($destinationPath, $profileImage);
-        $request['photo'] = "$profileImage";
-        // $input['image'] = "$profileImage";
-      }
+      $path = Storage::putFile('images', $request->file('photo'));
 
       $product = Producto::create([
         'negocio_id' => $request->negocio_id,
@@ -90,7 +86,7 @@ class ProductoController extends Controller
         'descrip' => $request->producto_descripcion,
         'precio' => $request->producto_precio,
         'activo' => 1,
-        'imagen' => $request->photo
+        'imagen' => $path
       ]);
 
       Promocion::create([

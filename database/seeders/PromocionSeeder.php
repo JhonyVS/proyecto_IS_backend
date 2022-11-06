@@ -15,6 +15,6 @@ class PromocionSeeder extends Seeder
      */
     public function run()
     {
-        Promocion::factory(1)->create(); 
+        // Promocion::factory(1)->create(); 
     }
 }

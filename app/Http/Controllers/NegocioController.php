@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use App\Models\Negocio;
 use App\Models\Usuario;
+use Faker\Core\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class NegocioController extends Controller
 {
@@ -40,12 +42,15 @@ class NegocioController extends Controller
     $user = Usuario::where('nick', $request->nick)->first();
 
     if (!$user || !Hash::check($request->password, $user->password)) {
-      return response(['login' => 'El nick o la contraseña son incorrectos']);
+      return response([
+        'status' => false,
+        'login' => 'El nick o la contraseña son incorrectos']);
     }
 
     $token = $user->createToken("descuentos")->plainTextToken;
 
     $response = [
+      'status' => true,
       'usuario_id' => $user->id,
       'token' => $token
     ];
@@ -89,13 +94,13 @@ class NegocioController extends Controller
       'telefono' => $request->telefono
     ]);
 
-    if ($image = $request->file('logo')) {
-      $destinationPath = 'images/';
-      $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-      $image->move($destinationPath, $profileImage);
-      $request['logo'] = "$profileImage";
-      // $input['image'] = "$profileImage";
-    }
+
+    $path = Storage::putFile('images', $request->file('logo'));
+    // $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+    // $image->move($destinationPath, $profileImage);
+    // $request['logo'] = $path;
+    // $input['image'] = "$profileImage";
+    
 
     Negocio::create([
       'usuario_id' => $user->id,
@@ -104,7 +109,7 @@ class NegocioController extends Controller
       'ubicacion' => $request->ubicacion,
       'horario_inicio' => $request->hora_apertura,
       'horario_cierre' => $request->hora_cierre,
-      'imagen' => $request->logo
+      'imagen' => $path
     ]);
     
     // $extension = $request->file('logo')->getClientOriginalExtension();
