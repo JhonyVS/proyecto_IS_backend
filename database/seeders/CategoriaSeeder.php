@@ -42,5 +42,9 @@ class CategoriaSeeder extends Seeder
         $c7 = new Categoria();
         $c7->categoria ="Desayuno";
         $c7->save();
+
+        $c8 = new Categoria();
+        $c8->categoria = "Otros";
+        $c8->save();
     }
 }
