@@ -9,6 +9,7 @@ use App\Models\Negocio;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
@@ -34,6 +35,20 @@ class ProductoController extends Controller
           'imagen'
         )
         ->get();
+
+      // $urls = $productos->select('imagen');
+      // $productos = json_decode(json_encode($productos), true);
+      // $productos = json_decode($productos);
+      $file_list = [];
+      // $contador = 0;
+      // $file_list = response()->file(public_path($urls));
+      foreach($productos as $producto){  
+
+        $archivo = Storage::get($producto->imagen);
+        $resp = response()->file($archivo);
+        $producto->archivo = $resp;
+      }
+      // $productos['archivo'] = $archivo;
         // ->paginate();
       return $productos;
         //
