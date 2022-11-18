@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\NegocioController;
 use App\Http\Controllers\ProductoController;
 use Illuminate\Http\Request;
@@ -32,3 +33,5 @@ Route::get('/destacados', [ProductoController::class, 'index']);
 Route::post('/registro/negocio', [NegocioController::class, 'store']);
 
 Route::post('/login/negocio', [NegocioController::class, 'login']);
+
+Route::get('/images/{id}', [ImageController::class, 'show']);

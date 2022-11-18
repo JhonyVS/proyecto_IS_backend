@@ -65,7 +65,6 @@ class ProductoController extends Controller
       $request->validate([
         'producto_nombre' => 'required|min:3|max:50',
         'producto_precio' => 'required|min:1|max:8',
-        //'producto_ubicacion' => 'required|min:5|max:50',
         'producto_descripcion' => 'required|min:5|max:255',
         'producto_categoria' => 'required',
         'promocion_descuento' => 'required',
@@ -77,7 +76,7 @@ class ProductoController extends Controller
         'photo' => 'required|image|mimes:jpeg,png,jpg|max:1024'
       ], $messages);
 
-      $path = Storage::putFile('images', $request->file('photo'));
+      $path = Storage::putFile('images', $request->file('photo'), ['Content-Type' => 'jpg']);
 
       $product = Producto::create([
         'negocio_id' => $request->negocio_id,
@@ -86,12 +85,11 @@ class ProductoController extends Controller
         'descrip' => $request->producto_descripcion,
         'precio' => $request->producto_precio,
         'activo' => 1,
-        'imagen' => $path
+        'imagen' => url(). "/" .$path
       ]);
 
       Promocion::create([
         'descuento' => $request->promocion_descuento,
-        //'descuento_nombre' => $request->descuento_nombre,
         'fecha_ini' => $request->promocion_fecha_inicio,
         'fecha_fin' => $request->promocion_fecha_fin,
         'hora_ini' => $request->promocion_hora_inicio,
