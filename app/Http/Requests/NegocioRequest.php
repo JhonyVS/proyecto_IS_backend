@@ -24,16 +24,16 @@ class NegocioRequest extends FormRequest
   public function rules()
   {
     return [
-      'nombre_negocio' => 'required|min:3|max:64|string',
-      'nombre_propietario' => 'required|min:4|max:64|string',
+      'nombre_negocio' => 'required|min:3|max:64',
+      'nombre_propietario' => 'required|min:4|max:64',
       'logo' => 'required|image|mimes:jpeg,png,jpg|max:1024',
-      'ubicacion' => 'required|min:10|max:255|string',
-      'descrip' => 'required|min:5|max:256|string',
-      'telefono' => 'required|min:5|max:20|string',
-      'hora_apertura' => 'required|string',
-      'hora_cierre' => 'required|string',
-      'nick' => 'required|min:4|max:32|unique:usuario|string',
-      'contrasena' => 'required|min:4|max:32|string'
+      'ubicacion' => 'required|min:10|max:255',
+      'descrip' => 'required|min:5|max:256',
+      'telefono' => 'required|min:5|max:20',
+      'hora_apertura' => 'required',
+      'hora_cierre' => 'required',
+      'nick' => 'required|min:4|max:32|unique:usuario',
+      'contrasena' => 'required|min:4|max:32'
     ];
   }
 
