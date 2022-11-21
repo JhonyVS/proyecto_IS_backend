@@ -46,12 +46,12 @@ class ImageController extends Controller
      */
     public function show($id)
     {
-        // $found = Storage::exists($id);
-        // if($found){4i
-            return response()->file(storage_path('app/images/') . $id, ['Content-Type' => 'image/jpeg']);
-        // } else {
-        //     return response('not found', 404);
-        // }
+        $found = Storage::exists('images/' . $id);
+        if($found){
+        return response()->file(storage_path('app/images/') . $id, ['Content-Type' => 'image/jpeg']);
+        } else {
+            return response('not found', 404);
+        }
     }
 
     /**

@@ -56,6 +56,13 @@ return [
             'throw' => false,
         ],
 
+        'own' => [
+            'driver' => 'local',
+            'root' => app_path('own-files'),
+            'url' => env('APP_URL') . '/storage',
+            'visibility' => 'public'
+        ],
+
     ],
 
     /*

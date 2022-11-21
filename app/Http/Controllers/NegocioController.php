@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\NegocioRequest;
 use App\Models\Negocio;
 use App\Models\Usuario;
 use Faker\Core\File;
@@ -67,25 +68,8 @@ class NegocioController extends Controller
     $request->user()->currentAccessToken()->delete();
   }
 
-  public function store(Request $request)
+  public function store(NegocioRequest $request)
   {
-    $messages = [
-      'required' => 'El campo :attribute es obligatorio',
-      'unique' => 'El nombre :input ya fue tomado'
-    ];
-
-    $request->validate([
-      'nombre_negocio' => 'required|min:3|max:64',
-      'nombre_propietario' => 'required|min:4|max:64',
-      'logo' => 'required|image|mimes:jpeg,png,jpg|max:1024',
-      'ubicacion' => 'required|min:10|max:255',
-      'descrip' => 'required|min:5|max:256',
-      'telefono' => 'required|min:5|max:20',
-      'hora_apertura' => 'required',
-      'hora_cierre' => 'required',
-      'nick' => 'required|min:4|max:32|unique:usuario',
-      'contrasena' => 'required|min:4|max:32'
-    ], $messages);
 
     $user = Usuario::create([
       'nombre' => $request->nombre_propietario,
@@ -94,13 +78,7 @@ class NegocioController extends Controller
       'telefono' => $request->telefono
     ]);
 
-
-    $path = Storage::putFile('images', $request->file('logo'));
-    // $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-    // $image->move($destinationPath, $profileImage);
-    // $request['logo'] = $path;
-    // $input['image'] = "$profileImage";
-    
+    $image_url = $request->logo->store('images');
 
     Negocio::create([
       'usuario_id' => $user->id,
@@ -109,14 +87,8 @@ class NegocioController extends Controller
       'ubicacion' => $request->ubicacion,
       'horario_inicio' => $request->hora_apertura,
       'horario_cierre' => $request->hora_cierre,
-      'imagen' => $path
+      'imagen' => substr($image_url, 7)
     ]);
-    
-    // $extension = $request->file('logo')->getClientOriginalExtension();
-    // $nombre = "logo_negocio_id_".$negocio->id.".".$extension;
-    // $path = $request->logo->storeAs('images', $nombre);
-    // $negocio->imagen_url = $path;
-    // $negocio->save();
 
     $token = $user->createToken("descuentos")->plainTextToken;
     $response = [

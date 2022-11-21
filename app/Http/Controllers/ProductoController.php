@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductoRequest;
 use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Promocion;
@@ -22,7 +23,6 @@ class ProductoController extends Controller
     public function index()
     {
       $hoy = Carbon::today();
-      // return Producto::all();
       $productos = DB::table('producto')
         ->leftJoin('promocion', 'promocion.producto_id', '=', 'producto.id')
         ->select(
@@ -35,21 +35,6 @@ class ProductoController extends Controller
           'imagen'
         )
         ->get();
-
-      // $urls = $productos->select('imagen');
-      // $productos = json_decode(json_encode($productos), true);
-      // $productos = json_decode($productos);
-      $file_list = [];
-      // $contador = 0;
-      // $file_list = response()->file(public_path($urls));
-      foreach($productos as $producto){  
-
-        $archivo = Storage::get($producto->imagen);
-        $resp = response()->file($archivo);
-        $producto->archivo = $resp;
-      }
-      // $productos['archivo'] = $archivo;
-        // ->paginate();
       return $productos;
         //
     }
@@ -70,28 +55,9 @@ class ProductoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductoRequest $request)
     {
-      $messages = [
-        'required' => 'El campo :attribute es obligatorio',
-        'unique' => 'El nombre :input ya fue tomado',
-      ];
-    
-      $request->validate([
-        'producto_nombre' => 'required|min:3|max:50',
-        'producto_precio' => 'required|min:1|max:8',
-        'producto_descripcion' => 'required|min:5|max:255',
-        'producto_categoria' => 'required',
-        'promocion_descuento' => 'required',
-        'promocion_fecha_inicio' => 'required',
-        'promocion_fecha_fin' => 'required',
-        'promocion_hora_inicio' => 'required',
-        'promocion_hora_fin' => 'required',
-        'negocio_id' => 'required',
-        'photo' => 'required|image|mimes:jpeg,png,jpg|max:1024'
-      ], $messages);
-
-      $path = Storage::putFile('images', $request->file('photo'), ['Content-Type' => 'jpg']);
+      $image_url = $request->photo->store('images');
 
       $product = Producto::create([
         'negocio_id' => $request->negocio_id,
@@ -100,7 +66,7 @@ class ProductoController extends Controller
         'descrip' => $request->producto_descripcion,
         'precio' => $request->producto_precio,
         'activo' => 1,
-        'imagen' => url(). "/" .$path
+        'imagen' => substr($image_url, 7)
       ]);
 
       Promocion::create([
@@ -109,7 +75,6 @@ class ProductoController extends Controller
         'fecha_fin' => $request->promocion_fecha_fin,
         'hora_ini' => $request->promocion_hora_inicio,
         'hora_fin' => $request->promocion_hora_fin,
-        'ubicacion' => $request->promocion_ubicacion,
         'producto_id' => $product->id
       ]);
       

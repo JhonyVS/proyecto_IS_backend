@@ -21,7 +21,6 @@ return new class extends Migration
         $table->date('fecha_fin')->nullable();
         $table->time('hora_ini')->default('00:00:00')->nullable();
         $table->time('hora_fin')->default('00:00:00')->nullable();
-        $table->string('ubicacion',50)->nullable();
         $table->boolean('activo')->default(1);
         $table->foreignId('producto_id')->constrained('producto', 'id');
       });

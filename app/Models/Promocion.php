@@ -17,8 +17,7 @@ class Promocion extends Model
         'fecha_ini',
         'fecha_fin',
         'hora_ini',
-        'hora_fin', 
-        'ubicacion'
+        'hora_fin'
     ];
 
     public function producto()
