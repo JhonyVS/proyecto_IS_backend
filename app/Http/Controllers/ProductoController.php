@@ -88,6 +88,25 @@ class ProductoController extends Controller
      */
     public function show($id)
     {
+      $respuesta = DB::table('producto')
+        ->join('promocion', 'promocion.producto_id', '=', 'producto.id')
+        ->where('producto.id', '=', $id)
+        ->select(
+          'producto.nombre',
+          'producto.precio',
+          'promocion.descuento',
+          'producto.categoria',
+          'producto.descrip',
+          'producto.imagen',
+          // 'producto.ubicacion',
+          'promocion.fecha_ini',
+          'promocion.fecha_fin',
+          'promocion.hora_ini',
+          'promocion.hora_fin'
+        )
+        ->get();
+
+      return $respuesta;
         //
     }
 
