@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FilterRequest;
 use App\Http\Requests\ProductoRequest;
 use Illuminate\Http\Request;
 use App\Models\Producto;
@@ -108,6 +109,43 @@ class ProductoController extends Controller
 
       return $respuesta;
         //
+    }
+
+    public function filter(FilterRequest $request)
+    {
+      if($request->tipo == 'A'){
+        $respuesta = DB::table('producto')
+        ->join('promocion', 'promocion.producto_id', '=', 'producto.id')
+        ->where('producto.categoria', '=', $request->contenido)
+        ->select(
+          'producto.id',
+          'categoria',
+          'nombre',
+          'precio',
+          'descuento',
+          'fecha_fin',
+          'imagen'
+        )
+        ->get();
+        return $respuesta;
+      }else if ($request->tipo == 'B'){
+        $respuesta = DB::table('producto')
+        ->join('promocion', 'promocion.producto_id', '=', 'producto.id')
+        ->where('producto.nombre', 'like', $request->contenido)
+        ->select(
+          'producto.id',
+          'categoria',
+          'nombre',
+          'precio',
+          'descuento',
+          'fecha_fin',
+          'imagen'
+        )
+        ->get();
+        return $respuesta;
+      }else{
+        return response('not found', 404);
+      }
     }
 
     /**
