@@ -7,11 +7,8 @@ use App\Http\Requests\ProductoRequest;
 use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Promocion;
-use App\Models\Negocio;
-use App\Models\Usuario;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
@@ -131,7 +128,7 @@ class ProductoController extends Controller
       }else if ($request->tipo == 'B'){
         $respuesta = DB::table('producto')
         ->join('promocion', 'promocion.producto_id', '=', 'producto.id')
-        ->where('producto.nombre', 'like', $request->contenido)
+        ->where('producto.nombre', 'like', ('%' . $request->contenido . '%'))
         ->select(
           'producto.id',
           'categoria',
