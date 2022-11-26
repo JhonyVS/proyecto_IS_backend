@@ -88,6 +88,7 @@ class ProductoController extends Controller
     {
       $respuesta = DB::table('producto')
         ->join('promocion', 'promocion.producto_id', '=', 'producto.id')
+        ->join('negocio', 'negocio.id', '=', 'producto.negocio_id')
         ->where('producto.id', '=', $id)
         ->select(
           'producto.nombre',
@@ -96,7 +97,7 @@ class ProductoController extends Controller
           'producto.categoria',
           'producto.descrip',
           'producto.imagen',
-          // 'producto.ubicacion',
+          'negocio.ubicacion',
           'promocion.fecha_ini',
           'promocion.fecha_fin',
           'promocion.hora_ini',
