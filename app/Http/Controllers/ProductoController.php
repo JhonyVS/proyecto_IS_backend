@@ -91,6 +91,7 @@ class ProductoController extends Controller
         ->join('negocio', 'negocio.id', '=', 'producto.negocio_id')
         ->where('producto.id', '=', $id)
         ->select(
+          'producto.id',
           'producto.nombre',
           'producto.precio',
           'promocion.descuento',
