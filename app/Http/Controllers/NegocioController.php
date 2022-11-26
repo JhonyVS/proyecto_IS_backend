@@ -8,6 +8,7 @@ use App\Models\Negocio;
 use App\Models\Usuario;
 use Faker\Core\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -50,9 +51,16 @@ class NegocioController extends Controller
 
     $token = $user->createToken("descuentos")->plainTextToken;
 
+    $negocio_id = DB::table('negocio')
+    ->join('usuario', 'usuario.id', '=', 'negocio.usuario_id')
+    ->select(
+      'negocio.id'
+    )
+    ->get();
     $response = [
       'status' => true,
       'usuario_id' => $user->id,
+      'negocio_id' => $negocio_id[0]->id, 
       'token' => $token
     ];
     return response($response);
