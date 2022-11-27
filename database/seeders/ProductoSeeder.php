@@ -53,7 +53,7 @@ class ProductoSeeder extends Seeder
     ]);
     
     //id 4
-    $img_url = Storage::putFile('images', app_path('own-files/pollo.png'));
+    $img_url = Storage::putFile('images', app_path('own-files/milhojas.jpg'));
     Producto::create([
       'negocio_id' => 1,
       'nombre' => "Pastel de mil hojas",
@@ -64,7 +64,7 @@ class ProductoSeeder extends Seeder
     ]);
 
     //id 5
-    $img_url = Storage::putFile('images', app_path('own-files/pollo.png'));
+    $img_url = Storage::putFile('images', app_path('own-files/ice.png'));
     Producto::create([
       'negocio_id' => 1,
       'nombre' => "Paceña Ice",
@@ -75,7 +75,7 @@ class ProductoSeeder extends Seeder
     ]);
 
     //id 6
-    $img_url = Storage::putFile('images', app_path('own-files/pollo.png'));
+    $img_url = Storage::putFile('images', app_path('own-files/trucha-a-la-parrilla.jpg'));
     Producto::create([
       'negocio_id' => 1,
       'nombre' => "Trucha a la parrilla",
@@ -86,7 +86,7 @@ class ProductoSeeder extends Seeder
     ]);
 
     //id 7
-    $img_url = Storage::putFile('images', app_path('own-files/pollo.png'));
+    $img_url = Storage::putFile('images', app_path('own-files/desayuno-americano.jpg'));
     Producto::create([
       'negocio_id' => 1,
       'nombre' => "Desayuno americano",
@@ -97,7 +97,7 @@ class ProductoSeeder extends Seeder
     ]);
 
     //id 8
-    $img_url = Storage::putFile('images', app_path('own-files/pollo.png'));
+    $img_url = Storage::putFile('images', app_path('own-files/trucha-frita.jpg'));
     Producto::create([
       'negocio_id' => 1,
       'nombre' => "Trucha frita",
