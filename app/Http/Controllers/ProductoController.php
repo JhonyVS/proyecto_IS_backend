@@ -20,9 +20,10 @@ class ProductoController extends Controller
      */
     public function index()
     {
-      $hoy = Carbon::today();
+      $hoy = Carbon::today()->toDateString();
       $productos = DB::table('producto')
         ->leftJoin('promocion', 'promocion.producto_id', '=', 'producto.id')
+        ->where('promocion.fecha_fin', '>=', $hoy)
         ->select(
           'producto.id',
           'categoria',
@@ -112,10 +113,12 @@ class ProductoController extends Controller
 
     public function filter(FilterRequest $request)
     {
+      $hoy = Carbon::today()->toDateString();
       if($request->tipo == 'A'){
         $respuesta = DB::table('producto')
         ->join('promocion', 'promocion.producto_id', '=', 'producto.id')
         ->where('producto.categoria', '=', $request->contenido)
+        ->where('promocion.fecha_fin', '>=', $hoy)
         ->select(
           'producto.id',
           'categoria',
@@ -131,6 +134,7 @@ class ProductoController extends Controller
         $respuesta = DB::table('producto')
         ->join('promocion', 'promocion.producto_id', '=', 'producto.id')
         ->where('producto.nombre', 'like', ('%' . $request->contenido . '%'))
+        ->where('promocion.fecha_fin', '>=', $hoy)
         ->select(
           'producto.id',
           'categoria',
