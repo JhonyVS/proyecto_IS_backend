@@ -85,26 +85,26 @@ class ProductoSeeder extends Seeder
       'categoria' => "Parrilla"
     ]);
 
-    //id 7
-    $img_url = Storage::putFile('images', app_path('own-files/desayuno-americano.jpg'));
-    Producto::create([
-      'negocio_id' => 1,
-      'nombre' => "Desayuno americano",
-      'descrip' => "Contiene huevos, ya sean fritos o revueltos, bacon y tortitas americanas",
-      'precio' => "12",
-      'imagen' => substr($img_url, 7),
-      'categoria' => "Desayuno"
-    ]);
+    // //id 7
+    // $img_url = Storage::putFile('images', app_path('own-files/desayuno-americano.jpg'));
+    // Producto::create([
+    //   'negocio_id' => 1,
+    //   'nombre' => "Desayuno americano",
+    //   'descrip' => "Contiene huevos, ya sean fritos o revueltos, bacon y tortitas americanas",
+    //   'precio' => "12",
+    //   'imagen' => substr($img_url, 7),
+    //   'categoria' => "Desayuno"
+    // ]);
 
-    //id 8
-    $img_url = Storage::putFile('images', app_path('own-files/trucha-frita.jpg'));
-    Producto::create([
-      'negocio_id' => 1,
-      'nombre' => "Trucha frita",
-      'descrip' => "Trucha con ensalada criolla y papas fritas",
-      'precio' => "40",
-      'imagen' => substr($img_url, 7),
-      'categoria' => "Otros"
-    ]);
+    // //id 8
+    // $img_url = Storage::putFile('images', app_path('own-files/trucha-frita.jpg'));
+    // Producto::create([
+    //   'negocio_id' => 1,
+    //   'nombre' => "Trucha frita",
+    //   'descrip' => "Trucha con ensalada criolla y papas fritas",
+    //   'precio' => "40",
+    //   'imagen' => substr($img_url, 7),
+    //   'categoria' => "Otros"
+    // ]);
   }
 }

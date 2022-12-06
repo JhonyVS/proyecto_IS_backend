@@ -76,24 +76,24 @@ class PromocionSeeder extends Seeder
       'hora_fin' => '23:00'
     ]);
 
-    //id 7
-    Promocion::create([
-      'producto_id' => 7,
-      'descuento' => 10,
-      'fecha_ini' => '2022-10-28',
-      'fecha_fin' => '2023-03-01',
-      'hora_ini' => '12:00',
-      'hora_fin' => '22:00'
-    ]);
+    // //id 7
+    // Promocion::create([
+    //   'producto_id' => 7,
+    //   'descuento' => 10,
+    //   'fecha_ini' => '2022-10-28',
+    //   'fecha_fin' => '2023-03-01',
+    //   'hora_ini' => '12:00',
+    //   'hora_fin' => '22:00'
+    // ]);
 
-    //id 8
-    Promocion::create([
-      'producto_id' => 8,
-      'descuento' => 30,
-      'fecha_ini' => '2022-10-28',
-      'fecha_fin' => '2022-12-31',
-      'hora_ini' => '12:00',
-      'hora_fin' => '20:00'
-    ]);
+    // //id 8
+    // Promocion::create([
+    //   'producto_id' => 8,
+    //   'descuento' => 30,
+    //   'fecha_ini' => '2022-10-28',
+    //   'fecha_fin' => '2022-12-31',
+    //   'hora_ini' => '12:00',
+    //   'hora_fin' => '20:00'
+    // ]);
   }
 }
