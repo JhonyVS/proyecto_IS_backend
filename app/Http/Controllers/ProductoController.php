@@ -56,7 +56,7 @@ class ProductoController extends Controller
      */
     public function store(ProductoRequest $request)
     {
-      $image_url = $request->photo->store('images');
+      $image_url = substr($request->photo->store('images'), 7);
 
       $product = Producto::create([
         'negocio_id' => $request->negocio_id,
@@ -65,7 +65,7 @@ class ProductoController extends Controller
         'descrip' => $request->producto_descripcion,
         'precio' => $request->producto_precio,
         'activo' => 1,
-        'imagen' => substr($image_url, 7)
+        'imagen' => $image_url
       ]);
 
       Promocion::create([
