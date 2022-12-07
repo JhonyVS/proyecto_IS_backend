@@ -86,7 +86,8 @@ class NegocioController extends Controller
       'telefono' => $request->telefono
     ]);
 
-    $image_url = $request->logo->store('images');
+    $image_url = substr(Storage::putFile('images', $request->photo), 7);
+    // $image_url = $request->logo->store('images');
 
     Negocio::create([
       'usuario_id' => $user->id,
@@ -95,7 +96,7 @@ class NegocioController extends Controller
       'ubicacion' => $request->ubicacion,
       'horario_inicio' => $request->hora_apertura,
       'horario_cierre' => $request->hora_cierre,
-      'imagen' => substr($image_url, 7)
+      'imagen' => $image_url
     ]);
 
     $token = $user->createToken("descuentos")->plainTextToken;
