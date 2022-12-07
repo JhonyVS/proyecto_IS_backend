@@ -49,7 +49,7 @@ class PromocionSeeder extends Seeder
     //id 4
     Promocion::create([
       'producto_id' => 4,
-      'descuento' => 12,
+      'descuento' => 6,
       'fecha_ini' => '2022-10-28',
       'fecha_fin' => '2023-01-11',
       'hora_ini' => '09:00',
