@@ -56,7 +56,8 @@ class ProductoController extends Controller
      */
     public function store(ProductoRequest $request)
     {
-      $image_url = substr($request->photo->store('images'), 7);
+      $image_url = substr(Storage::putFile('images', $request->photo), 7);
+      // $image_url = substr($request->photo->store('images'), 7);
 
       $product = Producto::create([
         'negocio_id' => $request->negocio_id,
